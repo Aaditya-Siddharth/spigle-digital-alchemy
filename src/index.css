@@ -135,6 +135,25 @@
     @apply bg-gradient-to-r from-spigle-600 to-blue-500 bg-clip-text text-transparent;
   }
   
+  /* Animated cards */
+  .interactive-card {
+    @apply relative overflow-hidden rounded-xl border border-transparent bg-white p-6 shadow-lg transition-all duration-300;
+  }
+  
+  .interactive-card::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-tr from-spigle-100/40 to-transparent opacity-0 transition-opacity duration-300;
+  }
+  
+  .interactive-card:hover {
+    @apply border-spigle-200 shadow-xl -translate-y-1;
+  }
+  
+  .interactive-card:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Floating animations */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -151,6 +170,59 @@
   .animated-underline {
     @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-spigle-500 after:transition-all after:duration-300 hover:after:w-full;
   }
+  
+  /* Text with gradient animation */
+  .gradient-text-animate {
+    @apply relative;
+    background: linear-gradient(90deg, #8b5cf6, #6d28d9, #5b21b6, #7c3aed);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 6s linear infinite;
+  }
+
+  /* Glowing button */
+  .button-glow {
+    @apply relative overflow-hidden;
+  }
+  
+  .button-glow::after {
+    content: '';
+    @apply absolute inset-0 -z-10 rounded-lg opacity-0 transition-opacity duration-500 ease-out;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, rgba(139, 92, 246, 0) 70%);
+  }
+  
+  .button-glow:hover::after {
+    @apply opacity-100;
+  }
+  
+  /* Card with perspective hover */
+  .card-perspective {
+    @apply transition-all duration-300;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card-perspective:hover {
+    transform: rotateY(10deg) rotateX(5deg);
+  }
+  
+  /* Liquid button */
+  .liquid-button {
+    @apply relative overflow-hidden rounded-lg bg-spigle-600 text-white transition-all duration-300;
+  }
+  
+  .liquid-button::before {
+    content: "";
+    @apply absolute inset-0 bg-spigle-700 opacity-0 transition-opacity duration-300;
+    transform: translateY(100%);
+  }
+  
+  .liquid-button:hover::before {
+    @apply opacity-100;
+    animation: liquid-rise 0.5s ease forwards;
+  }
 }
 
 @keyframes float {
@@ -162,6 +234,27 @@
   }
   100% {
     transform: translateY(0px);
+  }
+}
+
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes liquid-rise {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
