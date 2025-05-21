@@ -77,6 +77,11 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
@@ -93,7 +98,7 @@
   }
   
   .service-card {
-    @apply relative overflow-hidden rounded-2xl border bg-white p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px];
+    @apply relative overflow-hidden rounded-2xl border bg-white p-6 shadow-md transition-all duration-300 hover:shadow-xl;
   }
   
   .service-icon {
@@ -108,4 +113,62 @@
     content: "";
     @apply absolute bottom-1 left-0 h-[6px] w-full -z-10 bg-spigle-300 opacity-40;
   }
+  
+  /* Animation utilities */
+  .fade-in {
+    @apply opacity-0 animate-fade-in;
+  }
+  
+  .scale-hover {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .bounce-on-hover {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  .glow-on-hover {
+    @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.5)];
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-spigle-600 to-blue-500 bg-clip-text text-transparent;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-float-fast {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  /* Animated underline */
+  .animated-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-spigle-500 after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Remove App.css styling conflicts */
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
 }
